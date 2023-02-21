@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Computer {
+public:
+    string brand;
+    string model;
+    
+    Computer(string brand, string model) {
+        this->brand = brand;
+        this->model = model;
+    }
+    
+    void turnOn() {
+        cout << brand << " " << model << " is turning on." << endl;
+    }
+    
+    void turnOff() {
+        cout << brand << " " << model << " is turning off." << endl;
+    }
+};
+
+class Client : public Computer {
+public:
+    Client(string brand, string model) : Computer(brand, model) {}
+    
+    void connect(Server server) {
+        cout << brand << " " << model << " is connecting to " << server.brand << " " << server.model << "." << endl;
+    }
+};
+
+class Server : public Computer {
+public:
+    Server(string brand, string model) : Computer(brand, model) {}
+    
+    void host() {
+        cout << brand << " " << model << " is hosting a network." << endl;
+    }
+};
+
+int main() {
+    Computer computer = Computer("Dell", "XPS 13");
+    computer.turnOn();
+    computer.turnOff();
+    
+    Client client = Client("Mac", "MacBook Pro");
+    client.turnOn();
+    client.turnOff();
+    Server server = Server("HP", "ProLiant");
+    server.turnOn();
+    server.turnOff();
+    client.connect(server);
+    server.host();
+    
+    return 0;
+}
